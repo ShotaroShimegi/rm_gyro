@@ -1,0 +1,4 @@
+gyro.c:14:9:ReadByte	32	static
+gyro.c:29:6:WriteByte	32	static
+gyro.c:44:6:InitGyro	16	static
+gyro.c:72:7:ReadGyro	24	static
