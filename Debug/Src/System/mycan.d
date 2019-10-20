@@ -1,4 +1,4 @@
-Src/System/mainsystem.o: ../Src/System/mainsystem.c ../Inc/main.h \
+Src/System/mycan.o: ../Src/System/mycan.c ../Inc/can.h ../Inc/main.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
  ../Inc/stm32f3xx_hal_conf.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
@@ -29,9 +29,10 @@ Src/System/mainsystem.o: ../Src/System/mainsystem.c ../Inc/main.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h ../Inc/tim.h \
- ../Inc/main.h ../Inc/can.h ../Inc/System/mycan.h ../Inc/System/gyro.h \
- ../Inc/System/mainsystem.h
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
+ ../Inc/System/mycan.h
+
+../Inc/can.h:
 
 ../Inc/main.h:
 
@@ -97,14 +98,4 @@ Src/System/mainsystem.o: ../Src/System/mainsystem.c ../Inc/main.h \
 
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h:
 
-../Inc/tim.h:
-
-../Inc/main.h:
-
-../Inc/can.h:
-
 ../Inc/System/mycan.h:
-
-../Inc/System/gyro.h:
-
-../Inc/System/mainsystem.h:

@@ -36,6 +36,9 @@ rm_gyro.list \
 OBJCOPY_HEX += \
 rm_gyro.hex \
 
+OBJCOPY_BIN += \
+rm_gyro.bin \
+
 
 # All Target
 all: rm_gyro.elf secondary-outputs
@@ -61,12 +64,17 @@ rm_gyro.hex: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+rm_gyro.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "rm_gyro.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

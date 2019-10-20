@@ -72,21 +72,26 @@ void InitGyro(void)
 float ReadGyro(void){
 	int16_t omega_raw_z;
 	float omega;
-	omega_raw_z = (int16_t)(ReadByte(GYRO_ZOUT_H) << 8 | ReadByte(GYRO_ZOUT_L));	//0x47が上位，0x48が下位の16bitデータでジャイロ値を取得
+
+	raw_value_h = ReadByte(GYRO_ZOUT_H);						//Read 7-4bit (addres 0x47)
+	raw_value_l = ReadByte(GYRO_ZOUT_L);						//Read 3-0bit (addres 0x48)
+
+	omega_raw_z = (int16_t)(raw_value_h << 8 | raw_value_l);
 	omega = (float)(omega_raw_z / GYRO_FIX);
 	return omega;
 }
 
+//Not Used and Checked Function
+int16_t ConvertOmegaToGimbal(float omega){
+	int64_t gimbal_omega = (int64_t)(omega * 8192 /360);	//Unit Conversion from rad/sec -> gimbal/sec
 
-/*
-void GetGyroOffset(uint16_t num){
-	float gyro_offset = 0;
-	int i;
-
-	for(i=0;i<num;i++){
-		gyro_offset += ReadGyro();
-		WaitMs(1);
-	}
-	gyro_base = gyro_offset / num;
+	return gimbal_omega;
 }
-*/
+
+int16_t ConvertAngleToGimbal(float angle){
+	int64_t gimbal_angle = (int64_t)(angle * 8192 /360);				//Unit  Conversion from degree to gimbal_angle(13 bit)
+	int16_t overflow_count = (int16_t)((double)gimbal_angle / 8192);		//Count 360deg Revolute
+	int16_t gimabel_now_angle = gimbal_angle / overflow_count;			//
+
+	return gimabel_now_angle;
+}

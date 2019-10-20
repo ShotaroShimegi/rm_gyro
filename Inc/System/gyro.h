@@ -27,6 +27,8 @@ void WriteByte(uint8_t,uint8_t);
 void InitGyro();
 float ReadGyro(void);
 void GetGyroOffset(uint16_t);
+int16_t ConvertOmegaToGimbal(float);
+int16_t ConvertAngleToGimbal(float);
 
 
 

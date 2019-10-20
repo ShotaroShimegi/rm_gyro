@@ -1,4 +1,6 @@
 gyro.c:14:9:ReadByte	32	static
 gyro.c:29:6:WriteByte	32	static
 gyro.c:44:6:InitGyro	16	static
-gyro.c:72:7:ReadGyro	24	static
+gyro.c:72:7:ReadGyro	16	static
+gyro.c:85:9:ConvertOmegaToGimbal	32	static
+gyro.c:91:9:ConvertAngleToGimbal	40	static
