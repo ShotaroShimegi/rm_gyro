@@ -74,8 +74,13 @@ int __io_putchar(int c) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == htim6.Instance){
-		omega = ReadGyro() - gyro_base;
-		angle_degree += omega * 0.001;
+		omega_yaw = ReadGyroYaw() - gyro_base_yaw;
+		omega_roll = ReadGyroRoll() - gyro_base_roll;
+		omega_pitch = ReadGyroPitch() - gyro_base_pitch;
+
+		angle_degree_yaw += omega_yaw * 0.001;
+		angle_degree_roll += omega_roll * 0.001;
+		angle_degree_pitch += omega_pitch * 0.001;
 	}	//---htim6 End---
 }
 

@@ -69,27 +69,54 @@ void InitGyro(void)
 
 }
 
-float ReadGyro(void){
+float ReadGyroYaw(void){
 	int16_t omega_raw_z;
 	float omega;
 
-	raw_value_h = ReadByte(GYRO_ZOUT_H);						//Read 7-4bit (addres 0x47)
-	raw_value_l = ReadByte(GYRO_ZOUT_L);						//Read 3-0bit (addres 0x48)
+	yaw_value_h = ReadByte(GYRO_ZOUT_H);						//Read 7-4bit (addres 0x47)
+	yaw_value_l = ReadByte(GYRO_ZOUT_L);						//Read 3-0bit (addres 0x48)
 
-	omega_raw_z = (int16_t)(raw_value_h << 8 | raw_value_l);
+	omega_raw_z = (int16_t)(yaw_value_h << 8 | yaw_value_l);
 	omega = (float)(omega_raw_z / GYRO_FIX);
 	return omega;
 }
 
+float ReadGyroRoll(void){
+	int16_t omega_raw_y;
+	float omega;
+
+	roll_value_h = ReadByte(GYRO_YOUT_H);						//Read 7-4bit (addres 0x45)
+	roll_value_l = ReadByte(GYRO_YOUT_L);						//Read 3-0bit (addres 0x46)
+
+	omega_raw_y = (int16_t)(roll_value_h << 8 | roll_value_l);
+	omega = (float)(omega_raw_y / GYRO_FIX);
+	return omega;
+}
+
+float ReadGyroPitch(void){
+	int16_t omega_raw_x;
+	float omega;
+
+	pitch_value_h = ReadByte(GYRO_XOUT_H);						//Read 7-4bit (addres 0x43)
+	pitch_value_l = ReadByte(GYRO_XOUT_L);						//Read 3-0bit (addres 0x44)
+
+	omega_raw_x = (int16_t)(pitch_value_h << 8 | pitch_value_l);
+	omega = (float)(omega_raw_x / GYRO_FIX);
+	return omega;
+}
 //Not Used and Checked Function
+
 int16_t ConvertOmegaToGimbal(float omega){
 	int64_t gimbal_omega = (int64_t)(omega * 8192 /360);	//Unit Conversion from rad/sec -> gimbal/sec
+
+	//work
 
 	return gimbal_omega;
 }
 
 int16_t ConvertAngleToGimbal(float angle){
 	int64_t gimbal_angle = (int64_t)(angle * 8192 /360);				//Unit  Conversion from degree to gimbal_angle(13 bit)
+
 	int16_t overflow_count = (int16_t)((double)gimbal_angle / 8192);		//Count 360deg Revolute
 	int16_t gimabel_now_angle = gimbal_angle / overflow_count;			//
 

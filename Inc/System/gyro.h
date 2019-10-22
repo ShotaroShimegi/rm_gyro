@@ -16,8 +16,14 @@
 	#define	PWR_MGMT_1 0x6B
 	#define	CONFIG 0x1A
 	#define GYRO_CONFIG 0x1B
+
+	#define GYRO_XOUT_H 0x43
+	#define GYRO_XOUT_L 0x44
+	#define GYRO_YOUT_H 0x45
+	#define GYRO_YOUT_L 0x46
 	#define GYRO_ZOUT_H 0x47
 	#define GYRO_ZOUT_L 0x48
+
 	#define GYRO_FIX  16.4f
 
 
@@ -25,7 +31,9 @@ uint8_t ReadByte(uint8_t);
 void WriteByte(uint8_t,uint8_t);
 
 void InitGyro();
-float ReadGyro(void);
+float ReadGyroYaw(void);
+float ReadGyroRoll(void);
+float ReadGyroPitch(void);
 void GetGyroOffset(uint16_t);
 int16_t ConvertOmegaToGimbal(float);
 int16_t ConvertAngleToGimbal(float);
